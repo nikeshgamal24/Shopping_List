@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_list/data/categories.dart';
 import 'package:shopping_list/models/category.dart';
+import 'package:shopping_list/models/grocery_item.dart';
 
 class NewItem extends StatefulWidget{
   const NewItem({super.key});
@@ -29,9 +30,16 @@ class _NewItemState extends State<NewItem>{
     if(_formKey.currentState!.validate()){
       _formKey.currentState!.save();
       //the .save() will trigger a speacial function on each and every text field of the form. The property name is 'onSaved'
-      print(_enteredName);
-      print(_enteredQuantity);
-      print(_enteredCategory);
+    
+    // to pass the value to from one page to antoher navigating the page we can use the Navigator.pop() and pass the value to the pop() 
+    Navigator.of(context).pop(
+      GroceryItem(
+      id: DateTime.now().toString(), 
+      name: _enteredName, 
+      quantity: _enteredQuantity, 
+      category: _enteredCategory
+      )
+    );
     }
   }
 
